@@ -22,7 +22,6 @@ public class User {
         this.password = password;
         this.dateOfBirth = dateOfBirth;
         this.graduatedSchool = graduatedSchool;
-        this.loggedIn = false;
         this.userID = nextUserID;
         nextUserID++;
     }
