@@ -6,17 +6,20 @@ public class UserInterface {
 	
 	// Updates current user profile information
 	public void UpdateProfile() {
-		
+		if (IfUserLoggedIn())
+		{
+			
+		}
 	}
 	
 	// Changes password upon current user request
 	public void ChangePass() {
-		
+
 	}
 	
 	// Adds friend to current user
 	public void AddFriend() {
-		
+
 	}
 	
 	// Removes friend if not exists
@@ -61,5 +64,14 @@ public class UserInterface {
 	// Lists blocked users of current user
 	public void ListBlockedUsers() {
 		
+	}
+	
+	public boolean IfUserLoggedIn()
+	{
+		if (this.CurrentUser == null)
+			// Login with any user
+			return false;
+		else 
+			return true;
 	}
 }

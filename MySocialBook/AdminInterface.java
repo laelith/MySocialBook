@@ -13,7 +13,6 @@ import java.util.Date;
 public class AdminInterface {
 
 	// Adds non existing user
-	// canımıniçi command.txt'e bakarsan bak şey var ADDUSER bla bla bla bla şeklinde, o output'u böyle yaparak verebilir miyiz?
 	// ADDUSER<TAB>name<TAB>userName<TAB>password<TAB>dateofBirth<TAB>schoolGraduate
 	public void AddUser() throws IOException, ParseException {
 		ArrayList<User> userList = Helper.FetchUsers();
