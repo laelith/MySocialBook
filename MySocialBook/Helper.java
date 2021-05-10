@@ -12,10 +12,22 @@ public class Helper
 {
 	public final static String pathToCsv = "C:\\Users\\merve\\users.txt";
 	public static ArrayList <User> FetchUsers() throws IOException, ParseException {
+=======
+import java.util.ArrayList;
+import java.io.BufferedReader;
+import java.io.FileReader;
+
+public class Helper
+{
+	public final static String pathToCsv = "users.txt";
+	public static ArrayList <User> FetchUsers()
+	{
+>>>>>>> origin/master
 		ArrayList<User> userList = new ArrayList<User>();
 		BufferedReader csvReader = new BufferedReader(new FileReader(pathToCsv));
 		String row = null;
 		while ((row  = csvReader.readLine()) != null) {
+<<<<<<< HEAD
 			String[] data = row.split("\t");
 			String name = data[0];
 			String username = data[1];
