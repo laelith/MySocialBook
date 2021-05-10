@@ -1,8 +1,6 @@
 // User requests will be controlled here.
 // Designed as the first user interface corresponding logged in user
 
-import java.lang.String;
-
 public class UserInterface {
 	private User CurrentUser = null;
 	
@@ -62,10 +60,6 @@ public class UserInterface {
 	}
 	// Lists blocked users of current user
 	public void ListBlockedUsers() {
-		
-	}
-	
-	public void SignOut() {
 		
 	}
 }

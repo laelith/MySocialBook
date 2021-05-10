@@ -2,9 +2,11 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class User {
-    private int userID;
+	
+	// Private
+	private int userID;
     private static int nextUserID = 1;
-    //I used nextUserID to increase ID's and also give everyone an unique ID
+    // I used nextUserID to increase ID's and also give everyone an unique ID
     private String name;
     private String userName;
     private String password;
@@ -14,8 +16,8 @@ public class User {
     private ArrayList<String> friendList;
     private ArrayList<String> blockedList;
     private ArrayList<String> postCollection;
-    private boolean loggedIn;
 
+    // Public
     public User(String name, String userName, String password, Date dateOfBirth, String graduatedSchool) {
         this.name = name;
         this.userName = userName;
@@ -27,13 +29,10 @@ public class User {
     }
 
     /*
-    It is said These IDs cannot be changed later. So I didn't write set method.
-    private void setUserID(int userID) {this.userID = userID;}
+    It is said These IDs cannot be changed later. So I didn't write set and get method for it.
+    public void setUserID(int userID) {this.userID = userID;}
+    public int getUserID() {return userID;}
     */
-
-    public void signIn(String userName, String password){
-
-    }
 
     public String getName() {
         return name;
@@ -47,9 +46,7 @@ public class User {
         return userName;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
+    public void setUserName(String userName) { this.userName = userName; }
 
     public String getPassword() {
         return password;
@@ -105,13 +102,5 @@ public class User {
 
     public void setPostCollection(ArrayList<String> postCollection) {
         this.postCollection = postCollection;
-    }
-
-    public boolean isLoggedIn() {
-        return loggedIn;
-    }
-
-    public void setLoggedIn(boolean loggedIn) {
-        this.loggedIn = loggedIn;
     }
 }
