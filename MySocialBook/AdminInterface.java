@@ -14,28 +14,28 @@ public class AdminInterface {
 
 	// Adds non existing user
 	// ADDUSER<TAB>name<TAB>userName<TAB>password<TAB>dateofBirth<TAB>schoolGraduate
-	public void addUser() throws IOException, ParseException {
-		ArrayList<User> userList = Helper.fetchUsers();
-		File file = new File("C:\\Users\\merve\\commands.txt");
-		Scanner sc = new Scanner(file);
-		String[] addedUser = sc.nextLine().split("\t");
-		String name = addedUser[1] ;
-		String username = addedUser[2];
-		String password = addedUser[3];
-		SimpleDateFormat dateofBirth = new SimpleDateFormat("MM/dd/yyyy");
-		Date convertedDateofBirth = dateofBirth.parse(addedUser[4]);
-		String graduatedSchool = (addedUser[5]);
-		User newUser = new User(name, username, password, convertedDateofBirth, graduatedSchool);
-		userList.add(newUser);
+	public static ArrayList<User> addUser(ArrayList<User>  userList, String userName, String name, String password, String Date, String University) throws IOException, ParseException {
+		// check if user exists in list
+		
+		// do data validation
+		
+		// add user
+		
+		// return user list
+		return userList;
 	}
 
 	// Removes existing user
-	public void removeUser() {
+	public static ArrayList<User> removeUser(ArrayList<User>  userList) {
+		// check if user exists
 		
+		// remove
+		
+		return userList;
 	}
 
 	// Lists users
-	public void listUsers() {
-		
+	public static void listUsers(ArrayList<User>  userList) {
+		// print users
 	}
 }

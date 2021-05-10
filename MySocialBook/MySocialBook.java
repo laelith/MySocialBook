@@ -8,12 +8,17 @@ import java.text.SimpleDateFormat;
 public class MySocialBook {
     public static void main(String[] args) throws IOException, ParseException {
     	ArrayList<User> userList = Helper.fetchUsers();
-        //UserInterface newUser = new UserInterface();
-        //newUser.signIn();
-        AdminInterface newUser = new AdminInterface();
-        newUser.addUser();
-        for (User user: userList){
-            System.out.println(user.getName());
+    	
+    	//ADDUSER    Adnan    adnan    adnan1    01/01/1991    Selcuk Universitesi
+    	String commandString = "ADDUSER    Adnan    adnan    adnan1    01/01/1991    Selcuk Universitesi";
+    	// Split command into parts
+    	String[] commandParts = commandString.split("\t");
+    	
+    	switch (commandParts[0].toUpperCase()) // Means ADDUSER
+    	{
+    	case "ADDUSER":
+    		AdminInterface.addUser(userList, commandParts[1], commandParts[2], commandParts[3], commandParts[4], commandParts[5]);
+    		break;
         }
     }
 }
