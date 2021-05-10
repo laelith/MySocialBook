@@ -2,7 +2,6 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class User {
-	
 	// Private
 	private int userID;
     private static int nextUserID = 1;

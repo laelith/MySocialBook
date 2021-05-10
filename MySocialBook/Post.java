@@ -20,6 +20,9 @@ public class Post {
     }
 
     public class VideoPost extends Post{
+        private String videoFilename;
+        private Double videoDuration;
+        private Integer theMaximumVideoLengthInMinutes=10;
 
     }
 }

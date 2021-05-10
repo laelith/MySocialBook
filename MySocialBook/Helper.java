@@ -8,11 +8,11 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.Date;
 
-public class Helper
-	{
-		public final static String pathToCsv = "users.txt";
-		public static ArrayList <User> FetchUsers() throws IOException, ParseException
-		{
+public class Helper {
+		public final static String pathToCsv = "C:\\Users\\merve\\users.txt";
+
+		// ADDUSER<TAB>name<TAB>userName<TAB>password<TAB>dateofBirth<TAB>schoolGraduate
+		public static ArrayList<User> fetchUsers() throws IOException, ParseException {
 			ArrayList<User> userList = new ArrayList<User>();
 			BufferedReader csvReader = new BufferedReader(new FileReader(pathToCsv));
 			String row = null;
