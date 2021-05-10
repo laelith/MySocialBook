@@ -14,9 +14,13 @@ public class AdminInterface {
 
 	// Adds non existing user
 	// ADDUSER<TAB>name<TAB>userName<TAB>password<TAB>dateofBirth<TAB>schoolGraduate
-	public static ArrayList<User> addUser(ArrayList<User>  userList, String userName, String name, String password, String Date, String University) throws IOException, ParseException {
+	public static ArrayList<User> addUser(ArrayList<User>  userList, String userName, String name, String password, String dateofBirth, String schoolGraduate) throws IOException, ParseException {
 		// check if user exists in list
-		
+		for (int i=0; i<userList.size(); i++){
+			if (userList[i].getUserName == userName ) {
+				System.out.println();
+			}
+		}
 		// do data validation
 		
 		// add user

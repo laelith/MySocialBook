@@ -10,7 +10,6 @@ import java.util.Date;
 
 public class Helper {
 		public final static String pathToCsv = "C:\\Users\\merve\\users.txt";
-
 		// ADDUSER<TAB>name<TAB>userName<TAB>password<TAB>dateofBirth<TAB>schoolGraduate
 		public static ArrayList<User> fetchUsers() throws IOException, ParseException {
 			ArrayList<User> userList = new ArrayList<User>();

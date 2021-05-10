@@ -23,6 +23,5 @@ public class Post {
         private String videoFilename;
         private Double videoDuration;
         private Integer theMaximumVideoLengthInMinutes=10;
-
     }
 }
