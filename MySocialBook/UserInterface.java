@@ -20,9 +20,7 @@ public class UserInterface {
 	
 	// Updates current user profile information
 	public void updateProfile() {
-		if (ifUserLoggedIn()){
-			
-		}
+
 	}
 	
 	// Changes password upon current user request

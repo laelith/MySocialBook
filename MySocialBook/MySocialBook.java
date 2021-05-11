@@ -17,8 +17,8 @@ public class MySocialBook {
 		switch (commandParts[0].toUpperCase()) // Means ADDUSER
     	{
     	case "ADDUSER":
-			Date commandParts[4] = new SimpleDateFormat("MM/dd/yyyy").parse(commandParts);
-    		AdminInterface.addUser(userList, commandParts[1], commandParts[2], commandParts[3], commandParts[4], commandParts[5]);
+    		Date date = new SimpleDateFormat("MM/dd/yyyy").parse(commandParts[4]);
+    		AdminInterface.addUser(userList, commandParts[1], commandParts[2], commandParts[3], date, commandParts[5]);
     		break;
         }
     }

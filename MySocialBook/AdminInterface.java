@@ -30,6 +30,7 @@ public class AdminInterface {
 	}
 
 	// Removes existing user
+	// REMOVEUSER<TAB>userID
 	public static ArrayList<User> removeUser (ArrayList <User> userList, Integer userID) {
 		// checks if user exists
 		for (User singleUser : userList) {
@@ -41,7 +42,7 @@ public class AdminInterface {
 		return userList;
 	}
 
-	// Lists users
+	// List Users: Users should be able to view all users in the system.
 	public static void listUsers(ArrayList <User> userList){
 		// print users
 		for (User singleUser : userList){
