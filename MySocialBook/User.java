@@ -28,10 +28,11 @@ public class User {
     }
 
     /*
-    It is said These IDs cannot be changed later. So I didn't write set and get method for it.
+    It is said These IDs cannot be changed later. So I didn't write set method.
     public void setUserID(int userID) {this.userID = userID;}
-    public int getUserID() {return userID;}
     */
+
+    public int getUserID() { return userID;}
 
     public String getName() {
         return name;
