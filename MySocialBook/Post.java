@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 import java.util.Date;
 
-
 public class Post {
     private String textContent;
     private Location location;

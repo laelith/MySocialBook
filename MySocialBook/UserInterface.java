@@ -4,20 +4,38 @@
 import java.io.*;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class UserInterface {
 	private User CurrentUser = null;
 
 	//Signs in the user
+	//SIGNIN<TAB>userName<TAB>password
 	public void signIn() throws IOException, ParseException {
 		ArrayList<User> userList = Helper.fetchUsers();
-		File file = new File("C:\\Users\\merve\\commands.txt");
-		BufferedReader br = new BufferedReader(new FileReader(file));
-		String st;
-		while ((st = br.readLine()) != null)
-			System.out.println(st);
+		Scanner scan = new Scanner (new File("C:\\Users\\merve\\commands.txt"));
+		String[] nameAndPassword = scan.nextLine().split("\t");
+		String inputUserName = nameAndPassword[1];
+		String inputUserPassword = nameAndPassword[2];
+		boolean userSignedIn=false;
+		//Checks userName and password for every user.
+		for (User user: userList){
+			if(inputUserName.equals(user.getUserName()) && inputUserPassword.equals(user.getPassword())) {
+				userSignedIn=true;
+			}
+		}
+		if (userSignedIn==true){
+			System.out.print("You have successfully signed in.");
+		}else{
+			System.out.print("Invalid username or password! Please try again.");
+		}
 	}
-	
+
+	//Signs out the user
+	public void signOut() {
+		//Sign-in durumunu false yap
+	}
+
 	// Updates current user profile information
 	public void updateProfile() {
 
@@ -76,6 +94,7 @@ public class UserInterface {
 	public void listBlockedUsers() {
 		
 	}
+
 	// Checks whether User logged in or not
 	public boolean ifUserLoggedIn() {
 		if (this.CurrentUser == null){
