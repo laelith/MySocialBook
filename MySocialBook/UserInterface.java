@@ -88,8 +88,16 @@ public class UserInterface {
 	public void removeFriend(String userName) throws IOException, ParseException {
 		Objects.requireNonNull(this.currentUser);
 		ArrayList<User> userList = Helper.fetchUsers();
-
-
+		boolean isFriend=false;
+		for (User user: userList){
+			if (ifUserLoggedIn() == true && user.getUserName().equals(userName)) {
+				this.currentUser.getFriendList().remove(user);
+				isFriend = true;
+				System.out.println(userName + " has been successfully removed from your friend list.");
+			}
+		}if (isFriend==false){
+			System.out.println("No such friend!");
+		}
 	}
 	
 	// Lists user friends
