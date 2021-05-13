@@ -67,16 +67,28 @@ public class UserInterface {
 	public void addFriend(String userName) throws IOException, ParseException {
 		Objects.requireNonNull(this.currentUser);
 		ArrayList<User> userList = Helper.fetchUsers();
+		boolean userExists=false;
 		for (User user: userList){
 			if (ifUserLoggedIn()==true && user.getUserName().equals(userName)){
 				this.currentUser.getFriendList().add(user);
+				System.out.println(userName + " has been successfully added to your friend list.");
+				userExists=true;
 			}
+			else if (this.currentUser.getFriendList().contains(user) && ifUserLoggedIn()==true){
+				System.out.println("This user is already in your friend list!");
+				userExists=true;
+			}
+		}if (userExists=false){
+			System.out.println("No such user!");
 		}
 	}
 	
 	// Removes friend if not exists
-	public void removeFriend() {
+	// REMOVEFRIEND<TAB>userName
+	public void removeFriend(String userName) throws IOException, ParseException {
 		Objects.requireNonNull(this.currentUser);
+		ArrayList<User> userList = Helper.fetchUsers();
+
 
 	}
 	
