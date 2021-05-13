@@ -12,9 +12,9 @@ public class User {
     private Date dateOfBirth;
     private String graduatedSchool;
     private Date lastLoginDate;
-    private ArrayList<String> friendList;
-    private ArrayList<String> blockedList;
-    private ArrayList<String> postCollection;
+    private ArrayList<User> friendList;
+    private ArrayList<User> blockedList;
+    private ArrayList<Post> postCollection;
 
     // Public
     public User(String name, String userName, String password, Date dateOfBirth, String graduatedSchool) {
@@ -80,27 +80,27 @@ public class User {
         this.lastLoginDate = lastLoginDate;
     }
 
-    public ArrayList<String> getFriendList() {
+    public ArrayList<User> getFriendList() {
         return friendList;
     }
 
-    public void setFriendList(ArrayList<String> friendList) {
+    public void setFriendList(ArrayList<User> friendList) {
         this.friendList = friendList;
     }
 
-    public ArrayList<String> getBlockedList() {
+    public ArrayList<User> getBlockedList() {
         return blockedList;
     }
 
-    public void setBlockedList(ArrayList<String> blockedList) {
+    public void setBlockedList(ArrayList<User> blockedList) {
         this.blockedList = blockedList;
     }
 
-    public ArrayList<String> getPostCollection() {
+    public ArrayList<Post> getPostCollection() {
         return postCollection;
     }
 
-    public void setPostCollection(ArrayList<String> postCollection) {
+    public void setPostCollection(ArrayList<Post> postCollection) {
         this.postCollection = postCollection;
     }
 }
