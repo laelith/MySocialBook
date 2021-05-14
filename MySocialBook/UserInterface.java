@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
 
+import Post.TextPost;
+
 public class UserInterface {
 	private User currentUser = null;
 	
@@ -130,7 +132,7 @@ public class UserInterface {
 			Location location = new Location(latitude,longitude);
 			Date date = new Date(System.currentTimeMillis());
 			//formatter.format(date); (To make a human-readable date)
-			Post userPost = new Post(textContent,location,taggedFriends,date);
+			TextPost userPost = new TextPost(textContent, location, taggedFriends, date);
 			this.currentUser.getPostCollection().add(userPost);
 		}
 	}

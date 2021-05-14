@@ -13,13 +13,17 @@ public class MySocialBook {
     	String commandString = "ADDUSER    Adnan    adnan    adnan1    01/01/1991    Selcuk Universitesi";
     	// Split command into parts
     	String[] commandParts = commandString.split("\t");
+    	
+    	UserInterface userPanel = new UserInterface();
 
-		switch (commandParts[0].toUpperCase()) // Means ADDUSER
+		switch (commandParts[0].toUpperCase()) // Means COMMAND in capital case
     	{
     	case "ADDUSER":
     		Date date = new SimpleDateFormat("MM/dd/yyyy").parse(commandParts[4]);
     		AdminInterface.addUser(commandParts[1], commandParts[2], commandParts[3], date, commandParts[5]);
     		break;
+    	case "SIGNIN":
+    		userPanel.signIn(commandParts);
         }
     }
 }
