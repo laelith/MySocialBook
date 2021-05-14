@@ -25,21 +25,20 @@ public class AdminInterface {
 
 	// Removes existing user
 	// REMOVEUSER<TAB>userID
-	public static ArrayList<User> removeUser (ArrayList <User> userList, Integer userID) {
+	public static void removeUser (Integer userID) {
 		// checks if user exists
-		for (User singleUser : userList) {
+		for (User singleUser : Helper.getUserList()) {
 			if (singleUser.getUserName().equals(userID)){
 				// removes
-				userList.remove(singleUser);
+				Helper.getUserList().remove(singleUser);
 			}
 		}
-		return userList;
 	}
 
 	// List Users: Users should be able to view all users in the system.
-	public static void listUsers(ArrayList <User> userList){
+	public static void listUsers(){
 		// print users
-		for (User singleUser : userList){
+		for (User singleUser : Helper.getUserList()){
 			System.out.println("Name  : " + singleUser.getName());
 			System.out.println("UserName  : " + singleUser.getUserName());
 			System.out.println("Date Of Birth  : " + singleUser.getDateOfBirth());

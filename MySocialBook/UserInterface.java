@@ -14,41 +14,28 @@ public class UserInterface {
 	//Signs in the user
 	//SIGNIN<TAB>userName<TAB>password
 	public void signIn() throws IOException, ParseException {
-		ArrayList<User> userList = Helper.fetchUsers();
-		
-		// what if user enters wrong command like 
-		// password then user name.
-		// so your user name will be your password
-		// and your password will be your user name.
-		// Good example of data validation check.
-		String inputUserName = nameAndPassword[1];
-		String inputUserPassword = nameAndPassword[2];
+		String inputUserName = nameAndPassword[1]; //****
+		String inputUserPassword = nameAndPassword[2]; //****
 		//boolean userSignedIn=false;
 		//Checks userName and password for every user.
-		for (User user: userList){
-			if(inputUserName.equals(user.getUserName()) && inputUserPassword.equals(user.getPassword())) {
+		for (User user: Helper.getUserList()) {
+			if (inputUserName.equals(user.getUserName()) && inputUserPassword.equals(user.getPassword())){
 				//userSignedIn=true;
-				this.currentUser=user;
+				this.currentUser = user;
 				System.out.print("You have successfully signed in.");
 				return;
 			}
 		}
-		
-		// why you check below again, you already signed in user above. No ?
-		//if (userSignedIn==true){
-		//	System.out.print("You have successfully signed in.");
-		//}else{
 		System.out.print("Invalid username or password! Please try again.");
 		return;
-		//}
-	}
+		}
 
 	//Signs out the user
 	public void signOut() {
-		// what if user has not logged in ????
-		// where is the check.
-		System.out.println("You have successfully signed out.");
-		this.currentUser=null;
+		if (bUserLoggedIn()){
+			System.out.println("You have successfully signed out.");
+			this.currentUser=null;
+		}
 
 	}
 
@@ -56,16 +43,7 @@ public class UserInterface {
 	public void updateProfile(String name, Date dateOfBirth,String graduatedSchool) throws IOException, ParseException {
 		//User must be logged in before updating the profile.
 		Objects.requireNonNull(this.currentUser);
-		
-		// I have very big question on below if statement, do you really need to check true if its true ?
-		// true == true results as true.
-		// you have true in first stage, why would you need to check true again?
-		// it has to be bUserLoggedIn() thats enough
-		// if (bUserLoggedIn()){
-		//        ......
-		//        ......
-		//    }
-		if (bUserLoggedIn()==true){
+		if (bUserLoggedIn()){
 			//UPDATEPROFILE<TAB>name<TAB>dateofBirth<TAB>schoolGraduated
 			this.currentUser.setName(name);
 			this.currentUser.setDateOfBirth(dateOfBirth);
@@ -77,7 +55,7 @@ public class UserInterface {
 	public void changePassword(String password) {
 		//CHPASS<TAB>oldPassword<TAB>newPassword
 		Objects.requireNonNull(this.currentUser);
-		if (bUserLoggedIn()==true) {
+		if (bUserLoggedIn()) {
 			this.currentUser.setPassword(password);
 		}
 	}
@@ -85,34 +63,22 @@ public class UserInterface {
 	// Adds friend to current user
 	// ADDFRIEND<TAB>userName
 	public void addFriend(String userName) throws IOException, ParseException {
-		
-		// check usage ... https://www.logicbig.com/how-to/code-snippets/jcode-java-utils-objects-requirenonnull.html
-		// Its not logical, below line is related with exception. You dont need that do you ?
-		// Objects.requireNonNull(this.currentUser); 
 		if (bUserLoggedIn()) {
 			System.out.println("User is not logged in");
 			return;
 		}
-		
-		// why we are reading those continuously 
-		// import it as function call...
-		// why reading over and over and over again.
-		ArrayList<User> userList = Helper.fetchUsers();
-		//boolean userExists=false;
-		
 		// check if user not exists		
-		for (User user: userList){
+		for (User user: Helper.getUserList()){
 			if (user.getUserName().equals(userName)){ // why user logged in is in this stage, it has to be upper. Because if user not logged in no need read user list at all...
 				this.currentUser.getFriendList().add(user);
 				System.out.println(userName + " has been successfully added to your friend list.");
 				return;
 			}
-			else if (this.currentUser.getFriendList().contains(user) && bUserLoggedIn()==true){
+			else if (this.currentUser.getFriendList().contains(user) && bUserLoggedIn()){
 				System.out.println("This user is already in your friend list!");
 				return;
 			}
 		}
-		// you dont need any or extra boolean for this check. If above ifs are failed that means user doesnt exists.
 		System.out.println("This user is not exists. Adding friend failed.");
 		return;
 	}
@@ -120,21 +86,17 @@ public class UserInterface {
 	// Removes friend if not exists
 	// REMOVEFRIEND<TAB>userName
 	public void removeFriend(String userName) throws IOException, ParseException {
-		Objects.requireNonNull(this.currentUser);
-		
-		// why reading same list again.
-		ArrayList<User> userList = Helper.fetchUsers();
-		boolean isFriend=false;
-		for (User user: userList){
-			// why logged in check in this stage.
-			if (bUserLoggedIn() == true && user.getUserName().equals(userName)) {
-				this.currentUser.getFriendList().remove(user);
-				isFriend = true;
-				System.out.println(userName + " has been successfully removed from your friend list.");
+			ArrayList<User> userList = Helper.getUserList();
+			boolean isFriend=false;
+			for (User user: userList){
+				if (bUserLoggedIn() && user.getUserName().equals(userName)) {
+					this.currentUser.getFriendList().remove(user);
+					isFriend = true;
+					System.out.println(userName + " has been successfully removed from your friend list.");
+				}
+			}if (isFriend==false){
+				System.out.println("No such friend!");
 			}
-		}if (isFriend==false){
-			System.out.println("No such friend!");
-		}
 	}
 	
 	// Lists user friends
