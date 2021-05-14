@@ -31,8 +31,11 @@ public class AdminInterface {
 			if (singleUser.getUserName().equals(userID)){
 				// removes
 				Helper.getUserList().remove(singleUser);
+				System.out.println("User has been successfully removed.");
+				return;
 			}
 		}
+		System.out.println("No such user!");
 	}
 
 	// List Users: Users should be able to view all users in the system.

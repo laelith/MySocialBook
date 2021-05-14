@@ -170,7 +170,19 @@ public class UserInterface {
 	
 	// Lists blocked friends of current user
 	public void listBlockedFriends() {
-
+		if (LoggedIn()) {
+			if (currentUser.getBlockedFriendList()==null){
+				System.out.println("You haven’t blocked any friend yet!");
+			}else{
+				for (User singleUser : currentUser.getBlockedFriendList()) {
+					System.out.println("Name  : " + singleUser.getName());
+					System.out.println("Username  : " + singleUser.getUserName());
+					System.out.println("Date Of Birth  : " + singleUser.getDateOfBirth());
+					System.out.println("School  : " + singleUser.getGraduatedSchool());
+					System.out.println("----------------------------------------------");
+				}
+			}
+		}
 	}
 
 	// Lists blocked users of current user
@@ -200,7 +212,7 @@ public class UserInterface {
 		}
 	}
 
-	// Checks whether User logged in or not
+	// Checks whether user logged in or not
 	public boolean LoggedIn() {
 		if (this.currentUser == null){
 			// Login with any user
