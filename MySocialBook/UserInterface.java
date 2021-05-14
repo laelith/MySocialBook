@@ -116,17 +116,16 @@ public class UserInterface {
 		}
 	}
 	
-	// Adds posts (maybe required some expansion)
+	// Adds Text posts
 	// ADDPOST-TEXT<TAB>textContent<TAB>longitude<TAB>latitude<TAB> userName1<:>userName2<:>..<:>userNameN
 	public void addTextPost(String textContent, Double longitude, Double latitude, ArrayList<User> taggedFriends) {
 		if (LoggedIn()) {
-			Location postLocation = new Location(Double latitude, Double longitude);
+			Location location = new Location(Double latitude, Double longitude);
 			Date date = new Date(System.currentTimeMillis());
-			//formatter.format(date);
-			Post userPost = new Post(String textContent, Location postLocation, ArrayList<User> taggedFriends, Date date);
+			//formatter.format(date); (To make a human-readable date)
+			Post userPost = new Post(String textContent, Location location, ArrayList<User> taggedFriends, Date date);
 			this.currentUser.getPostCollection().add(userPost);
 		}
-
 	}
 
 //	public void addImagePost(textContent, longitude, latitude, ArrayList<User> taggedFriends) {

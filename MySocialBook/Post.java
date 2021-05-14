@@ -7,7 +7,17 @@ public abstract class Post {
     private ArrayList<User> taggedFriends;
     private Date date;
 
-    public abstract String display(); //In the case of inclusion a new post type to mysocialbook, designer must specify its printing format. Because of this, Abstract method is used.
+
+    //In the case of inclusion a new post type to mysocialbook, designer must specify its printing format. Because of this, Abstract method is used.
+    public abstract String display();
+
+
+    public Post(String textContent, Location location, ArrayList<User> taggedFriends, Date date) {
+        this.textContent = textContent;
+        this.location = location;
+        this.taggedFriends = taggedFriends;
+        this.date = date;
+    }
 
     public class TextPost extends Post{
         public  String display(){
@@ -15,6 +25,11 @@ public abstract class Post {
                     + "Date : " + date
                     + "Location : " + location.getLatitude() + location.getLongitude()
                     + "Friends tagged in this post :" + taggedFriends;
+        }
+
+        //Public
+        public TextPost(String textContent, Location location, ArrayList<User> taggedFriends, Date date) {
+            super(textContent, location, taggedFriends, date);
         }
     }
 
@@ -31,6 +46,13 @@ public abstract class Post {
                     + "Image Resolution: " + imageResolution;
         }
 
+        public ImagePost(String textContent, Location location, ArrayList<User> taggedFriends, Date date, String imagineFileName, Integer imageResolution) {
+            super(textContent, location, taggedFriends, date);
+            this.imagineFileName = imagineFileName;
+            this.imageResolution = imageResolution;
+        }
+
+        //Public
         public Integer getImageResolution() {
             return imageResolution;
         }
@@ -61,6 +83,14 @@ public abstract class Post {
                     + "Video Duration: " + videoDuration + " minutes";
         }
 
+        public VideoPost(String textContent, Location location, ArrayList<User> taggedFriends, Date date, String videoFilename, Double videoDuration) {
+            super(textContent, location, taggedFriends, date);
+            this.videoFilename = videoFilename;
+            //Checks whether duration is longer than 10 minutes or not.
+            setVideoDuration(videoDuration);
+        }
+
+        //Public
         public String getVideoFilename() {
             return videoFilename;
         }
@@ -80,15 +110,9 @@ public abstract class Post {
                 System.out.println("Error: Your video exceeds maximum allowed duration of 10 minutes.");
             }
         }
-
-        public VideoPost(String videoFilename, Double videoDuration) {
-            this.videoFilename = videoFilename;
-            //videoDuration is checked inside of the set method.
-            setVideoDuration(videoDuration);
-        }
     }
 
-
+    //Public
     public String getTextContent() {
         return textContent;
     }
