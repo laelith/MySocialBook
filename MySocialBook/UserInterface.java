@@ -9,16 +9,21 @@ import java.util.Objects;
 
 public class UserInterface {
 	private User currentUser = null;
+	
+	public UserInterface() {
+		//empty constructor
+	}
 
-	//Signs in the user
-	//SIGNIN<TAB>userName<TAB>password
-	public void signIn() throws IOException, ParseException {
-		String inputUserName = nameAndPassword[1]; //****
-		String inputUserPassword = nameAndPassword[2]; //****
+	/** 
+	* Signs in the user<br>
+	* Command:<br>
+	* SIGNIN	userName	password
+	*/
+	public void signIn(String Username, String Password) throws IOException, ParseException {
 		//boolean userSignedIn=false;
 		//Checks userName and password for every user.
 		for (User user: Helper.getUserList()) {
-			if (inputUserName.equals(user.getUserName()) && inputUserPassword.equals(user.getPassword())){
+			if (Username.equals(user.getUserName()) && Password.equals(user.getPassword())){
 				//userSignedIn=true;
 				this.currentUser = user;
 				System.out.print("You have successfully signed in.");
@@ -118,12 +123,14 @@ public class UserInterface {
 	
 	// Adds Text posts
 	// ADDPOST-TEXT<TAB>textContent<TAB>longitude<TAB>latitude<TAB> userName1<:>userName2<:>..<:>userNameN
-	public void addTextPost(String textContent, Double longitude, Double latitude, ArrayList<User> taggedFriends) {
-		if (LoggedIn()) {
-			Location location = new Location(Double latitude, Double longitude);
+	public void addTextPost(String textContent, Double longitude, Double latitude, ArrayList<User> taggedFriends) 
+	{
+		if (LoggedIn()) 
+		{
+			Location location = new Location(latitude,longitude);
 			Date date = new Date(System.currentTimeMillis());
 			//formatter.format(date); (To make a human-readable date)
-			Post userPost = new Post(String textContent, Location location, ArrayList<User> taggedFriends, Date date);
+			Post userPost = new Post(textContent,location,taggedFriends,date);
 			this.currentUser.getPostCollection().add(userPost);
 		}
 	}
