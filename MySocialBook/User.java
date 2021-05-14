@@ -13,6 +13,7 @@ public class User {
     private String graduatedSchool;
     private Date lastLoginDate;
     private ArrayList<User> friendList;
+    private ArrayList<User> blockedFriendList;
     private ArrayList<User> blockedList;
     private ArrayList<Post> postCollection;
 
@@ -102,5 +103,13 @@ public class User {
 
     public void setPostCollection(ArrayList<Post> postCollection) {
         this.postCollection = postCollection;
+    }
+
+    public ArrayList<User> getBlockedFriendList() {
+        return blockedFriendList;
+    }
+
+    public void setBlockedFriendList(ArrayList<User> blockedFriendList) {
+        this.blockedFriendList = blockedFriendList;
     }
 }

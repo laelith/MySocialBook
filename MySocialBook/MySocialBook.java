@@ -18,7 +18,7 @@ public class MySocialBook {
     	{
     	case "ADDUSER":
     		Date date = new SimpleDateFormat("MM/dd/yyyy").parse(commandParts[4]);
-    		AdminInterface.addUser(Helper.getUserList(), commandParts[1], commandParts[2], commandParts[3], date, commandParts[5]);
+    		AdminInterface.addUser(commandParts[1], commandParts[2], commandParts[3], date, commandParts[5]);
     		break;
         }
     }
