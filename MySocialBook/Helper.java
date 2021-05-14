@@ -9,10 +9,12 @@ import java.io.FileReader;
 import java.util.Date;
 
 public class Helper {
+
+	private static ArrayList<User> userList = new ArrayList<User>();
+
 		public final static String pathToCsv = "C:\\Users\\merve\\users.txt";
 		// ADDUSER<TAB>name<TAB>userName<TAB>password<TAB>dateofBirth<TAB>schoolGraduate
-		public static ArrayList<User> fetchUsers() throws IOException, ParseException {
-			ArrayList<User> userList = new ArrayList<User>();
+		public static void populateUsers() throws IOException, ParseException {
 			BufferedReader csvReader = new BufferedReader(new FileReader(pathToCsv));
 			String row = null;
 			while ((row  = csvReader.readLine()) != null) {
@@ -30,6 +32,9 @@ public class Helper {
 				userList.add(newUser);
 			}
 			csvReader.close();
-			return userList;
 		}
+
+	public static ArrayList<User> getUserList() {
+		return userList;
+	}
 }

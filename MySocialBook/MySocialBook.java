@@ -7,7 +7,7 @@ import java.text.SimpleDateFormat;
 
 public class MySocialBook {
     public static void main(String[] args) throws IOException, ParseException {
-    	ArrayList<User> userList = Helper.fetchUsers();
+    	Helper.populateUsers();
     	
     	//ADDUSER    Adnan    adnan    adnan1    01/01/1991    Selcuk Universitesi
     	String commandString = "ADDUSER    Adnan    adnan    adnan1    01/01/1991    Selcuk Universitesi";
@@ -18,7 +18,7 @@ public class MySocialBook {
     	{
     	case "ADDUSER":
     		Date date = new SimpleDateFormat("MM/dd/yyyy").parse(commandParts[4]);
-    		AdminInterface.addUser(userList, commandParts[1], commandParts[2], commandParts[3], date, commandParts[5]);
+    		AdminInterface.addUser(Helper.getUserList(), commandParts[1], commandParts[2], commandParts[3], date, commandParts[5]);
     		break;
         }
     }

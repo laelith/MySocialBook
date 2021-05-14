@@ -15,11 +15,6 @@ public class UserInterface {
 	//SIGNIN<TAB>userName<TAB>password
 	public void signIn() throws IOException, ParseException {
 		ArrayList<User> userList = Helper.fetchUsers();
-		// Will use in MySocialBook.java in case of command inputs. Dont implement here.
-		// Don't forget what I say, your function needed to do single work.
-		// Don't over complicate funtcions.
-		Scanner scan = new Scanner (new File("C:\\Users\\merve\\commands.txt"));
-		String[] nameAndPassword = scan.nextLine().split("\t");
 		
 		// what if user enters wrong command like 
 		// password then user name.
