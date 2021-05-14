@@ -119,19 +119,25 @@ public class UserInterface {
 	// Adds posts (maybe required some expansion)
 	// ADDPOST-TEXT<TAB>textContent<TAB>longitude<TAB>latitude<TAB> userName1<:>userName2<:>..<:>userNameN
 	public void addPost() {
-		Objects.requireNonNull(this.currentUser);
+		if (LoggedIn()) {
+
+		}
 
 	}
 	
 	// Removing the last post of current user
 	public void removeLastPost() {
-		Objects.requireNonNull(this.currentUser);
+		if (LoggedIn()) {
+
+		}
 
 	}
 	
 	// Showing all posts related with user
 	public void showPosts() {
-		Objects.requireNonNull(this.currentUser);
+		if (LoggedIn()) {
+
+		}
 
 	}
 	
@@ -145,23 +151,11 @@ public class UserInterface {
 					if (currentUser.getFriendList().contains(singleUser)){
 						//If these two users are friends, removing these friends from each other will be appropriate.
 						this.currentUser.getFriendList().remove(singleUser);
-						//Blocks
-						this.currentUser.getBlockedList().add(singleUser);
 					}
-					//Blocks
+					//Blocks whether friend or a user
 					this.currentUser.getBlockedList().add(singleUser);
 					System.out.println(userName + " has been successfully blocked.");
 					return;
-				}
-			}
-			//Blocking friend part
-			for (User user: Helper.getUserList()){
-				if (user.getUserName().equals(userName)){
-					//Stops friendship
-					this.currentUser.getFriendList().remove(user);
-					//Blocks
-					this.currentUser.getBlockedList().add(user);
-					System.out.println(userName + " has been successfully blocked.");
 				}
 			}
 		}
@@ -193,7 +187,7 @@ public class UserInterface {
 	}
 	
 	// Lists blocked friends of current user
-	public void listBlockedFriends() {
+	public void showBlockedFriends() {
 		if (LoggedIn()) {
 			if (currentUser.getBlockedFriendList()==null){
 				System.out.println("You haven’t blocked any friend yet!");
@@ -210,7 +204,7 @@ public class UserInterface {
 	}
 
 	// Lists blocked users of current user
-	public void listBlockedUsers() {
+	public void showBlockedUsers() {
 		if (LoggedIn()) {
 			if (currentUser.getBlockedFriendList() == null) {
 				System.out.println("You haven’t blocked any friend yet!");
