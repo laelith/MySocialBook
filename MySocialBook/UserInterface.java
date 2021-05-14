@@ -124,7 +124,7 @@ public class UserInterface {
 			Date date = new Date(System.currentTimeMillis());
 			//formatter.format(date);
 			Post userPost = new Post(String textContent, Location postLocation, ArrayList<User> taggedFriends, Date date);
-			this.currentUser.setPostCollection(userPost);
+			this.currentUser.getPostCollection().add(userPost);
 		}
 
 	}
