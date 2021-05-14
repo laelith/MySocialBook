@@ -68,7 +68,7 @@ public class UserInterface {
 		}
 		// check if user not exists		
 		for (User user: Helper.getUserList()){
-			if (user.getUserName().equals(userName)){ // why user logged in is in this stage, it has to be upper. Because if user not logged in no need read user list at all...
+			if (user.getUserName().equals(userName)){
 				this.currentUser.getFriendList().add(user);
 				System.out.println(userName + " has been successfully added to your friend list.");
 				return;
@@ -78,7 +78,7 @@ public class UserInterface {
 				return;
 			}
 		}
-		System.out.println("This user is not exists. Adding friend failed.");
+		System.out.println("No such user!");
 		return;
 	}
 	
@@ -136,7 +136,29 @@ public class UserInterface {
 	}
 	
 	// Blocks user from current user if exists
-	public void blockUser() {
+	// BLOCK<TAB>userName
+	public void blockUser(String userName) {
+		if (LoggedIn()) {
+			System.out.println("User is not logged in");
+			return;
+		}
+		// Checks if user not exists
+		for (User user: Helper.getUserList()){
+			if (user.getUserName().equals(userName)){
+				this.currentUser.getBlockedList().add(user);
+				System.out.println(userName + " has been successfully blocked.");
+				return;
+			}
+			//Blocking friend part
+			else if (this.currentUser.getFriendList().contains(user)){
+				this.currentUser.getFriendList().remove(user);
+				this.currentUser.getBlockedFriendList().add(user);
+				System.out.println("This user is already in your friend list!");
+				return;
+			}
+		}
+		System.out.println("This user is not exists. Adding friend failed.");
+		return;
 
 	}
 	
@@ -158,7 +180,16 @@ public class UserInterface {
 				System.out.println("You haven’t blocked any friend yet!");
 				return;
 			}else{
+				//For users which are blocked
 				for (User singleUser : currentUser.getBlockedList()) {
+					System.out.println("Name  : " + singleUser.getName());
+					System.out.println("Username  : " + singleUser.getUserName());
+					System.out.println("Date Of Birth  : " + singleUser.getDateOfBirth());
+					System.out.println("School  : " + singleUser.getGraduatedSchool());
+					System.out.println("----------------------------------------------");
+				}
+				//For friends which are blocked
+				for (User singleUser : currentUser.getBlockedFriendList()) {
 					System.out.println("Name  : " + singleUser.getName());
 					System.out.println("Username  : " + singleUser.getUserName());
 					System.out.println("Date Of Birth  : " + singleUser.getDateOfBirth());
