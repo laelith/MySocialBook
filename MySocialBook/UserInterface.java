@@ -101,8 +101,20 @@ public class UserInterface {
 	
 	// Lists user friends
 	public void listFriends() {
-		Objects.requireNonNull(this.currentUser);
-
+		if (bUserLoggedIn()){
+			if (currentUser.getFriendList()==null){
+				System.out.println("You have not added any friend yet!");
+				return;
+			}else{
+				for (User singleUser : currentUser.getFriendList()) {
+					System.out.println("Name  : " + singleUser.getName());
+					System.out.println("Username  : " + singleUser.getUserName());
+					System.out.println("Date Of Birth  : " + singleUser.getDateOfBirth());
+					System.out.println("School  : " + singleUser.getGraduatedSchool());
+					System.out.println("----------------------------------------------");
+				}
+			}
+		}
 	}
 	
 	// Adds posts (maybe required some expansion)

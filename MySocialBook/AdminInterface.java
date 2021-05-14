@@ -40,7 +40,7 @@ public class AdminInterface {
 		// print users
 		for (User singleUser : Helper.getUserList()){
 			System.out.println("Name  : " + singleUser.getName());
-			System.out.println("UserName  : " + singleUser.getUserName());
+			System.out.println("Username  : " + singleUser.getUserName());
 			System.out.println("Date Of Birth  : " + singleUser.getDateOfBirth());
 			System.out.println("School  : " + singleUser.getGraduatedSchool());
 			System.out.println("----------------------------------------------");
