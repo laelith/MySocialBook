@@ -139,33 +139,57 @@ public class UserInterface {
 	// BLOCK<TAB>userName
 	public void blockUser(String userName) {
 		if (LoggedIn()) {
-			System.out.println("User is not logged in");
-			return;
-		}
-		// Checks if user not exists
-		for (User user: Helper.getUserList()){
-			if (user.getUserName().equals(userName)){
-				this.currentUser.getBlockedList().add(user);
-				System.out.println(userName + " has been successfully blocked.");
-				return;
+			// Blocking a user
+			for (User singleUser: Helper.getUserList()){
+				if (singleUser.getUserName().equals(userName)){
+					if (currentUser.getFriendList().contains(singleUser)){
+						//If these two users are friends, removing these friends from each other will be appropriate.
+						this.currentUser.getFriendList().remove(singleUser);
+						//Blocks
+						this.currentUser.getBlockedList().add(singleUser);
+					}
+					//Blocks
+					this.currentUser.getBlockedList().add(singleUser);
+					System.out.println(userName + " has been successfully blocked.");
+					return;
+				}
 			}
 			//Blocking friend part
-			else if (this.currentUser.getFriendList().contains(user)){
-				this.currentUser.getFriendList().remove(user);
-				this.currentUser.getBlockedFriendList().add(user);
-				System.out.println("This user is already in your friend list!");
-				return;
+			for (User user: Helper.getUserList()){
+				if (user.getUserName().equals(userName)){
+					//Stops friendship
+					this.currentUser.getFriendList().remove(user);
+					//Blocks
+					this.currentUser.getBlockedList().add(user);
+					System.out.println(userName + " has been successfully blocked.");
+				}
 			}
 		}
-		System.out.println("This user is not exists. Adding friend failed.");
-		return;
-
 	}
 	
 	// Unblocks user from current user
-	public void unblockUser() {
-		Objects.requireNonNull(this.currentUser);
-
+	// UNBLOCK<TAB>userName
+	public void unblockUser(String userName) {
+		if (LoggedIn()) {
+			//For friends
+			for (User singleUser : currentUser.getBlockedFriendList()){
+				if (singleUser.getUserName().equals(userName)) {
+					//Unblocks user
+					currentUser.getBlockedFriendList().remove(singleUser);
+					System.out.println(singleUser.getUserName() + " has been successfully unblocked.");
+					return;
+				}
+			}
+			//For users who aren't friends
+			for (User singleUser : currentUser.getBlockedList()){
+				if (singleUser.getUserName().equals(userName)) {
+					//Unblocks user
+					currentUser.getBlockedList().remove(singleUser);
+					System.out.println(singleUser.getUserName() + " has been successfully unblocked.");
+					return;
+				}
+			}
+		}
 	}
 	
 	// Lists blocked friends of current user
@@ -188,26 +212,24 @@ public class UserInterface {
 	// Lists blocked users of current user
 	public void listBlockedUsers() {
 		if (LoggedIn()) {
-			if (currentUser.getBlockedList() == null) {
+			if (currentUser.getBlockedFriendList() == null) {
 				System.out.println("You haven’t blocked any friend yet!");
-				return;
-			}else{
-				//For users which are blocked
-				for (User singleUser : currentUser.getBlockedList()) {
-					System.out.println("Name  : " + singleUser.getName());
-					System.out.println("Username  : " + singleUser.getUserName());
-					System.out.println("Date Of Birth  : " + singleUser.getDateOfBirth());
-					System.out.println("School  : " + singleUser.getGraduatedSchool());
-					System.out.println("----------------------------------------------");
-				}
-				//For friends which are blocked
-				for (User singleUser : currentUser.getBlockedFriendList()) {
-					System.out.println("Name  : " + singleUser.getName());
-					System.out.println("Username  : " + singleUser.getUserName());
-					System.out.println("Date Of Birth  : " + singleUser.getDateOfBirth());
-					System.out.println("School  : " + singleUser.getGraduatedSchool());
-					System.out.println("----------------------------------------------");
-				}
+			}
+			//For users who are blocked
+			for (User singleUser : currentUser.getBlockedList()) {
+				System.out.println("Name  : " + singleUser.getName());
+				System.out.println("Username  : " + singleUser.getUserName());
+				System.out.println("Date Of Birth  : " + singleUser.getDateOfBirth());
+				System.out.println("School  : " + singleUser.getGraduatedSchool());
+				System.out.println("----------------------------------------------");
+			}
+			//For friends who are blocked (Friends are also users.)
+			for (User singleUser : currentUser.getBlockedFriendList()) {
+				System.out.println("Name  : " + singleUser.getName());
+				System.out.println("Username  : " + singleUser.getUserName());
+				System.out.println("Date Of Birth  : " + singleUser.getDateOfBirth());
+				System.out.println("School  : " + singleUser.getGraduatedSchool());
+				System.out.println("----------------------------------------------");
 			}
 		}
 	}
@@ -222,4 +244,5 @@ public class UserInterface {
 			return true;
 		}
 	}
+
 }
