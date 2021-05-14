@@ -107,6 +107,7 @@ public class UserInterface {
 	}
 	
 	// Adds posts (maybe required some expansion)
+	// ADDPOST-TEXT<TAB>textContent<TAB>longitude<TAB>latitude<TAB> userName1<:>userName2<:>..<:>userNameN
 	public void addPost() {
 		Objects.requireNonNull(this.currentUser);
 
