@@ -101,11 +101,11 @@ public class UserInterface {
 	// Lists user friends
 	public void listFriends() {
 		if (LoggedIn()){
-			if (currentUser.getFriendList()==null){
+			if (this.currentUser.getFriendList()==null){
 				System.out.println("You have not added any friend yet!");
 				return;
 			}else{
-				for (User singleUser : currentUser.getFriendList()) {
+				for (User singleUser : this.currentUser.getFriendList()) {
 					System.out.println("Name  : " + singleUser.getName());
 					System.out.println("Username  : " + singleUser.getUserName());
 					System.out.println("Date Of Birth  : " + singleUser.getDateOfBirth());
@@ -118,28 +118,46 @@ public class UserInterface {
 	
 	// Adds posts (maybe required some expansion)
 	// ADDPOST-TEXT<TAB>textContent<TAB>longitude<TAB>latitude<TAB> userName1<:>userName2<:>..<:>userNameN
-	public void addPost() {
+	public void addTextPost(String textContent, Double longitude, Double latitude, ArrayList<User> taggedFriends) {
 		if (LoggedIn()) {
-
+			Location postLocation = new Location(Double latitude, Double longitude);
+			Date date = new Date(System.currentTimeMillis());
+			//formatter.format(date);
+			Post userPost = new Post(String textContent, Location postLocation, ArrayList<User> taggedFriends, Date date);
+			this.currentUser.setPostCollection(userPost);
 		}
 
 	}
-	
-	// Removing the last post of current user
-	public void removeLastPost() {
-		if (LoggedIn()) {
 
-		}
-
-	}
-	
-	// Showing all posts related with user
-	public void showPosts() {
-		if (LoggedIn()) {
-
-		}
-
-	}
+//	public void addImagePost(textContent, longitude, latitude, ArrayList<User> taggedFriends) {
+//		if (LoggedIn()) {
+//
+//		}
+//
+//	}
+//
+//	public void addVideoPost(textContent, longitude, latitude, ArrayList<User> taggedFriends) {
+//		if (LoggedIn()) {
+//
+//		}
+//
+//	}
+//
+//	// Removing the last post of current user
+//	public void removeLastPost() {
+//		if (LoggedIn()) {
+//
+//		}
+//
+//	}
+//
+//	// Showing all posts related with user
+//	public void showPosts() {
+//		if (LoggedIn()) {
+//
+//		}
+//
+//	}
 	
 	// Blocks user from current user if exists
 	// BLOCK<TAB>userName
@@ -148,7 +166,7 @@ public class UserInterface {
 			// Blocking a user
 			for (User singleUser: Helper.getUserList()){
 				if (singleUser.getUserName().equals(userName)){
-					if (currentUser.getFriendList().contains(singleUser)){
+					if (this.currentUser.getFriendList().contains(singleUser)){
 						//If these two users are friends, removing these friends from each other will be appropriate.
 						this.currentUser.getFriendList().remove(singleUser);
 					}
@@ -166,19 +184,19 @@ public class UserInterface {
 	public void unblockUser(String userName) {
 		if (LoggedIn()) {
 			//For friends
-			for (User singleUser : currentUser.getBlockedFriendList()){
+			for (User singleUser : this.currentUser.getBlockedFriendList()){
 				if (singleUser.getUserName().equals(userName)) {
 					//Unblocks user
-					currentUser.getBlockedFriendList().remove(singleUser);
+					this.currentUser.getBlockedFriendList().remove(singleUser);
 					System.out.println(singleUser.getUserName() + " has been successfully unblocked.");
 					return;
 				}
 			}
 			//For users who aren't friends
-			for (User singleUser : currentUser.getBlockedList()){
+			for (User singleUser : this.currentUser.getBlockedList()){
 				if (singleUser.getUserName().equals(userName)) {
 					//Unblocks user
-					currentUser.getBlockedList().remove(singleUser);
+					this.currentUser.getBlockedList().remove(singleUser);
 					System.out.println(singleUser.getUserName() + " has been successfully unblocked.");
 					return;
 				}
@@ -189,10 +207,10 @@ public class UserInterface {
 	// Lists blocked friends of current user
 	public void showBlockedFriends() {
 		if (LoggedIn()) {
-			if (currentUser.getBlockedFriendList()==null){
+			if (this.currentUser.getBlockedFriendList()==null){
 				System.out.println("You haven’t blocked any friend yet!");
 			}else{
-				for (User singleUser : currentUser.getBlockedFriendList()) {
+				for (User singleUser : this.currentUser.getBlockedFriendList()) {
 					System.out.println("Name  : " + singleUser.getName());
 					System.out.println("Username  : " + singleUser.getUserName());
 					System.out.println("Date Of Birth  : " + singleUser.getDateOfBirth());
@@ -206,11 +224,11 @@ public class UserInterface {
 	// Lists blocked users of current user
 	public void showBlockedUsers() {
 		if (LoggedIn()) {
-			if (currentUser.getBlockedFriendList() == null) {
+			if (this.currentUser.getBlockedFriendList() == null) {
 				System.out.println("You haven’t blocked any friend yet!");
 			}
 			//For users who are blocked
-			for (User singleUser : currentUser.getBlockedList()) {
+			for (User singleUser : this.currentUser.getBlockedList()) {
 				System.out.println("Name  : " + singleUser.getName());
 				System.out.println("Username  : " + singleUser.getUserName());
 				System.out.println("Date Of Birth  : " + singleUser.getDateOfBirth());
@@ -218,7 +236,7 @@ public class UserInterface {
 				System.out.println("----------------------------------------------");
 			}
 			//For friends who are blocked (Friends are also users.)
-			for (User singleUser : currentUser.getBlockedFriendList()) {
+			for (User singleUser : this.currentUser.getBlockedFriendList()) {
 				System.out.println("Name  : " + singleUser.getName());
 				System.out.println("Username  : " + singleUser.getUserName());
 				System.out.println("Date Of Birth  : " + singleUser.getDateOfBirth());
