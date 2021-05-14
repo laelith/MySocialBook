@@ -6,7 +6,6 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
-import java.util.Scanner;
 
 public class UserInterface {
 	private User currentUser = null;
@@ -32,7 +31,7 @@ public class UserInterface {
 
 	//Signs out the user
 	public void signOut() {
-		if (bUserLoggedIn()){
+		if (LoggedIn()){
 			System.out.println("You have successfully signed out.");
 			this.currentUser=null;
 		}
@@ -43,7 +42,7 @@ public class UserInterface {
 	public void updateProfile(String name, Date dateOfBirth,String graduatedSchool) throws IOException, ParseException {
 		//User must be logged in before updating the profile.
 		Objects.requireNonNull(this.currentUser);
-		if (bUserLoggedIn()){
+		if (LoggedIn()){
 			//UPDATEPROFILE<TAB>name<TAB>dateofBirth<TAB>schoolGraduated
 			this.currentUser.setName(name);
 			this.currentUser.setDateOfBirth(dateOfBirth);
@@ -55,7 +54,7 @@ public class UserInterface {
 	public void changePassword(String password) {
 		//CHPASS<TAB>oldPassword<TAB>newPassword
 		Objects.requireNonNull(this.currentUser);
-		if (bUserLoggedIn()) {
+		if (LoggedIn()) {
 			this.currentUser.setPassword(password);
 		}
 	}
@@ -63,7 +62,7 @@ public class UserInterface {
 	// Adds friend to current user
 	// ADDFRIEND<TAB>userName
 	public void addFriend(String userName) throws IOException, ParseException {
-		if (bUserLoggedIn()) {
+		if (LoggedIn()) {
 			System.out.println("User is not logged in");
 			return;
 		}
@@ -74,7 +73,7 @@ public class UserInterface {
 				System.out.println(userName + " has been successfully added to your friend list.");
 				return;
 			}
-			else if (this.currentUser.getFriendList().contains(user) && bUserLoggedIn()){
+			else if (this.currentUser.getFriendList().contains(user) && LoggedIn()){
 				System.out.println("This user is already in your friend list!");
 				return;
 			}
@@ -89,7 +88,7 @@ public class UserInterface {
 			ArrayList<User> userList = Helper.getUserList();
 			boolean isFriend=false;
 			for (User user: userList){
-				if (bUserLoggedIn() && user.getUserName().equals(userName)) {
+				if (LoggedIn() && user.getUserName().equals(userName)) {
 					this.currentUser.getFriendList().remove(user);
 					isFriend = true;
 					System.out.println(userName + " has been successfully removed from your friend list.");
@@ -101,7 +100,7 @@ public class UserInterface {
 	
 	// Lists user friends
 	public void listFriends() {
-		if (bUserLoggedIn()){
+		if (LoggedIn()){
 			if (currentUser.getFriendList()==null){
 				System.out.println("You have not added any friend yet!");
 				return;
@@ -138,7 +137,6 @@ public class UserInterface {
 	
 	// Blocks user from current user if exists
 	public void blockUser() {
-		Objects.requireNonNull(this.currentUser);
 
 	}
 	
@@ -150,19 +148,29 @@ public class UserInterface {
 	
 	// Lists blocked friends of current user
 	public void listBlockedFriends() {
-		Objects.requireNonNull(this.currentUser);
 
 	}
 
 	// Lists blocked users of current user
 	public void listBlockedUsers() {
-		Objects.requireNonNull(this.currentUser);
-
+		if (LoggedIn()) {
+			if (currentUser.getBlockedList() == null) {
+				System.out.println("You haven’t blocked any friend yet!");
+				return;
+			}else{
+				for (User singleUser : currentUser.getBlockedList()) {
+					System.out.println("Name  : " + singleUser.getName());
+					System.out.println("Username  : " + singleUser.getUserName());
+					System.out.println("Date Of Birth  : " + singleUser.getDateOfBirth());
+					System.out.println("School  : " + singleUser.getGraduatedSchool());
+					System.out.println("----------------------------------------------");
+				}
+			}
+		}
 	}
 
 	// Checks whether User logged in or not
-	// bCamelCase is the naming convention, don't use if in function name.
-	public boolean bUserLoggedIn() {
+	public boolean LoggedIn() {
 		if (this.currentUser == null){
 			// Login with any user
 			System.out.println("Error: Please sign in and try again.");
