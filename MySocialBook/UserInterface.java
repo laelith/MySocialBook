@@ -125,47 +125,112 @@ public class UserInterface {
 	
 	// Adds Text posts
 	// ADDPOST-TEXT<TAB>textContent<TAB>longitude<TAB>latitude<TAB> userName1<:>userName2<:>..<:>userNameN
-	public void addTextPost(String textContent, Double longitude, Double latitude, ArrayList<User> taggedFriends) 
-	{
-		if (LoggedIn()) 
-		{
+	public void addTextPost(String textContent, Double longitude, Double latitude, ArrayList<User> taggedFriends) {
+		if (LoggedIn()) {
 			Location location = new Location(latitude,longitude);
 			Date date = new Date(System.currentTimeMillis());
 			//formatter.format(date); (To make a human-readable date)
-			TextPost userPost = new TextPost(textContent, location, taggedFriends, date);
-			this.currentUser.getPostCollection().add(userPost);
+			ArrayList<User> availableTaggedFriends = new ArrayList<User>();
+			for (User allFriend: this.currentUser.getFriendList()) {
+				for (User taggedFriend : taggedFriends) {
+					//Checks whether this current user have a friend or not
+					if (allFriend.getUserName().contains(taggedFriend.getUserName())) {
+						availableTaggedFriends.add(taggedFriend);
+					}else{
+						System.out.println(taggedFriend.getUserName() + " is not your friend, and will not be tagged!");
+					}
+				}
+				TextPost userPost = new TextPost(textContent, location, availableTaggedFriends, date);
+				System.out.println("The post has been successfully added.");
+				this.currentUser.getPostCollection().add(userPost);
+			}
 		}
 	}
 
-//	public void addImagePost(textContent, longitude, latitude, ArrayList<User> taggedFriends) {
-//		if (LoggedIn()) {
-//
-//		}
-//
-//	}
-//
-//	public void addVideoPost(textContent, longitude, latitude, ArrayList<User> taggedFriends) {
-//		if (LoggedIn()) {
-//
-//		}
-//
-//	}
-//
-//	// Removing the last post of current user
-//	public void removeLastPost() {
-//		if (LoggedIn()) {
-//
-//		}
-//
-//	}
-//
-//	// Showing all posts related with user
-//	public void showPosts() {
-//		if (LoggedIn()) {
-//
-//		}
-//
-//	}
+	// Adds Image posts
+	// ADDPOST-IMAGE<TAB>textContent<TAB>longitude<TAB>latitude<TAB> userName1<:>userName2<:>..<:>userNameN<TAB>filePath<TAB>resolution
+	public void addImagePost(String textContent, Double longitude, Double latitude, ArrayList<User> taggedFriends, String imagineFileName, String imageResolution) {
+		if (LoggedIn()) {
+			Location location = new Location(latitude,longitude);
+			Date date = new Date(System.currentTimeMillis());
+			//formatter.format(date); (To make a human-readable date)
+			ArrayList<User> availableTaggedFriends = new ArrayList<User>();
+			for (User allFriend: this.currentUser.getFriendList()) {
+				for (User taggedFriend : taggedFriends) {
+					//Checks whether this current user have a friend or not
+					if (allFriend.getUserName().contains(taggedFriend.getUserName())) {
+						availableTaggedFriends.add(taggedFriend);
+					}else{
+						System.out.println(taggedFriend.getUserName() + " is not your friend, and will not be tagged!");
+					}
+				}
+				ImagePost userPost = new ImagePost(textContent, location, availableTaggedFriends, date, imagineFileName, imageResolution);
+				System.out.println("The post has been successfully added.");
+				this.currentUser.getPostCollection().add(userPost);
+			}
+		}
+	}
+
+	// Adds Video posts
+	//ADDPOST-VIDEO<TAB>textContent<TAB>longitude<TAB>latitude<TAB> userName1<:>userName2<:>..<:>userNameN<TAB>filePath<TAB>videoDuration
+	public void addVideoPost(String textContent, Double longitude, Double latitude, ArrayList<User> taggedFriends, String videoFilename, Double videoDuration) {
+		if (LoggedIn()) {
+			if (LoggedIn()) {
+				Location location = new Location(latitude,longitude);
+				Date date = new Date(System.currentTimeMillis());
+				//formatter.format(date); (To make a human-readable date)
+				ArrayList<User> availableTaggedFriends = new ArrayList<User>();
+				for (User allFriend: this.currentUser.getFriendList()) {
+					for (User taggedFriend : taggedFriends) {
+						//Checks whether this current user have a friend or not
+						if (allFriend.getUserName().contains(taggedFriend.getUserName())) {
+							availableTaggedFriends.add(taggedFriend);
+						}else{
+							System.out.println(taggedFriend.getUserName() + " is not your friend, and will not be tagged!");
+						}
+					}
+					VideoPost userPost = new VideoPost(textContent, location, availableTaggedFriends, date, videoFilename, videoDuration);
+					System.out.println("The post has been successfully added.");
+					this.currentUser.getPostCollection().add(userPost);
+				}
+			}
+		}
+	}
+
+	// Removing the last post of current user
+	// REMOVELASTPOST
+	public void removeLastPost() {
+		if (LoggedIn()) {
+			//finds the index of the last post
+			int lastPostIndex = this.currentUser.getPostCollection().size()-1;
+			//checks whether postCollection is null or not
+			if (this.currentUser.getPostCollection()==null){
+				System.out.println("Error: You do not have any post.");
+			}else{
+				this.currentUser.getPostCollection().remove(lastPostIndex);
+				System.out.println("Your last post has been successfully removed.");
+			}
+		}
+	}
+
+	// Showing all posts related with user
+	public void showPosts(String userName) {
+		if (LoggedIn()) {
+			for (User user: Helper.getUserList()){
+				if (user.getUserName().equals(userName)){
+					if (user.getPostCollection()==null){
+						System.out.println(user.getUserName() + " does not have any posts yet.");
+					}else{
+						System.out.println(user.getUserName() + "'s Posts");
+						System.out.println("**************");
+						for (Post post : user.getPostCollection()){
+							System.out.println(post.display());
+						}
+					}
+				}
+			}
+		}
+	}
 	
 	// Blocks user from current user if exists
 	// BLOCK<TAB>userName
