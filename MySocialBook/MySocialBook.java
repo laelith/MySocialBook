@@ -50,7 +50,7 @@ public class MySocialBook {
 //		case "SHOWBLOCKEDUSERS":
 //		case "SIGNOUT":
 			}
-			scanner.close();
 		}
+		scanner.close();
 	}
 }
