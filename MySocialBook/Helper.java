@@ -1,5 +1,5 @@
 // Wraps up helper functions to operate main functionality
-// 
+
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

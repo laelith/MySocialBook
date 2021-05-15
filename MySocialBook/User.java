@@ -27,10 +27,6 @@ public class User {
         nextUserID++;
     }
 
-    public void setUserID(int userID) {
-        this.userID = userID;
-    }
-
     public int getUserID() { return userID;}
 
     public String getName() {
@@ -41,15 +37,11 @@ public class User {
         this.name = name;
     }
 
-    public String getUserName() {
-        return userName;
-    }
+    public String getUserName() { return userName; }
 
     public void setUserName(String userName) { this.userName = userName; }
 
-    public String getPassword() {
-        return password;
-    }
+    public String getPassword() { return password; }
 
     public void setPassword(String password) {
         this.password = password;
