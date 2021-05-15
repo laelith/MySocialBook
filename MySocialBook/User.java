@@ -2,7 +2,6 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class User {
-	// Private
 	private int userID;
     private static int nextUserID = 1;
     // I used nextUserID to increase ID's and also give everyone an unique ID
@@ -12,10 +11,10 @@ public class User {
     private Date dateOfBirth;
     private String graduatedSchool;
     private Date lastLoginDate;
-    private ArrayList<User> friendList;
-    private ArrayList<User> blockedFriendList;
-    private ArrayList<User> blockedList;
-    private ArrayList<Post> postCollection;
+    private ArrayList<User> friendList = new ArrayList<User>();
+    private ArrayList<User> blockedFriendList = new ArrayList<User>();
+    private ArrayList<User> blockedList = new ArrayList<User>();
+    private ArrayList<Post> postCollection= new ArrayList<Post>();
 
     // Public
     public User(String name, String userName, String password, Date dateOfBirth, String graduatedSchool) {
@@ -28,10 +27,9 @@ public class User {
         nextUserID++;
     }
 
-    /*
-    It is said These IDs cannot be changed later. So I didn't write set method.
-    public void setUserID(int userID) {this.userID = userID;}
-    */
+    public void setUserID(int userID) {
+        this.userID = userID;
+    }
 
     public int getUserID() { return userID;}
 

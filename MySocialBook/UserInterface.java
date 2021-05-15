@@ -9,29 +9,20 @@ import java.util.Date;
 
 public class UserInterface {
 	private User currentUser = null;
-	
-	public UserInterface() {
-		//empty constructor
-	}
 
-	/** 
-	* Signs in the user<br>
-	* Command:<br>
-	* SIGNIN	userName	password
-	*/
-	public void signIn(String Username, String Password) throws IOException, ParseException {
-		//boolean userSignedIn=false;
-		//Checks userName and password for every user.
+
+	//SIGNIN userName password
+
+	public void signIn(String username, String password){
+		//Checks username and password for every user.
 		for (User user: Helper.getUserList()) {
-			if (Username.equals(user.getUserName()) && Password.equals(user.getPassword())){
-				//userSignedIn=true;
+			if (username.equals(user.getUserName()) && password.equals(user.getPassword())){
 				this.currentUser = user;
 				System.out.println("You have successfully signed in.");
 				return;
 			}
 		}
 		System.out.println("Invalid username or password! Please try again.");
-		return;
 		}
 
 	//Signs out the user
@@ -68,33 +59,29 @@ public class UserInterface {
 	
 	// Adds friend to current user
 	// ADDFRIEND<TAB>userName
-	public void addFriend(String userName) throws IOException, ParseException {
+	public void addFriend(String userName){
 		if (LoggedIn()) {
-			System.out.println("User is not logged in");
-			return;
-		}
-		// check if user not exists		
-		for (User user: Helper.getUserList()){
-			if (user.getUserName().equals(userName)){
-				this.currentUser.getFriendList().add(user);
-				System.out.println(userName + " has been successfully added to your friend list.");
-				return;
+			for (User user : Helper.getUserList()){
+				if (user.getUserName().equals(userName) && !this.currentUser.getFriendList().contains(user)){
+					this.currentUser.getFriendList().add(user);
+					System.out.println(userName + " has been successfully added to your friend list.");
+					return;
+				}else if (user.getUserName().equals(userName) && this.currentUser.getFriendList().contains(user)){
+					System.out.println("This user is already in your friend list!");
+					return;
+				}else{
+					System.out.println("No such user!");
+					return;
+				}
 			}
-			else if (this.currentUser.getFriendList().contains(user) && LoggedIn()){
-				System.out.println("This user is already in your friend list!");
-				return;
-			}
 		}
-		System.out.println("No such user!");
-		return;
 	}
 	
 	// Removes friend if not exists
 	// REMOVEFRIEND<TAB>userName
 	public void removeFriend(String userName) throws IOException, ParseException {
-			ArrayList<User> userList = Helper.getUserList();
 			boolean isFriend=false;
-			for (User user: userList){
+			for (User user: Helper.getUserList()){
 				if (LoggedIn() && user.getUserName().equals(userName)) {
 					this.currentUser.getFriendList().remove(user);
 					isFriend = true;
