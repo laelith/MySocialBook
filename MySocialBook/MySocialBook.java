@@ -20,7 +20,9 @@ public class MySocialBook {
 
 		UserInterface userPanel = new UserInterface();
 		while (scanner.hasNextLine()) {
-			String[] commandParts = (scanner.nextLine()).split("\t");
+			String commandLine = scanner.nextLine();
+			System.out.println("Command : " + commandLine);
+			String[] commandParts = commandLine.split("\t");
 
 			switch (commandParts[0].toUpperCase()) { // Means COMMAND in capital case
 				case "ADDUSER":
@@ -31,7 +33,7 @@ public class MySocialBook {
 					userPanel.signIn(commandParts[1], commandParts[2]);
 					break;
 				default:
-					System.out.println("Hey");
+					;
 //		case "REMOVEUSER":
 //		case "LISTUSERS":
 //		case "UPDATEPROFILE":

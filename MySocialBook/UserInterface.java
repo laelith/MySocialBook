@@ -26,11 +26,11 @@ public class UserInterface {
 			if (Username.equals(user.getUserName()) && Password.equals(user.getPassword())){
 				//userSignedIn=true;
 				this.currentUser = user;
-				System.out.print("You have successfully signed in.");
+				System.out.println("You have successfully signed in.");
 				return;
 			}
 		}
-		System.out.print("Invalid username or password! Please try again.");
+		System.out.println("Invalid username or password! Please try again.");
 		return;
 		}
 
