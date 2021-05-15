@@ -14,11 +14,11 @@ public class MySocialBook {
 		String commandString = "ADDUSER    Adnan    adnan    adnan1    01/01/1991    Selcuk Universitesi";
 		// Split command into parts
 
-		File file = new File("C:\\Users\\merve\\commands.txt");
+		File file = new File("commands.txt");
 		Scanner scanner = new Scanner(file);
+		
 
 		UserInterface userPanel = new UserInterface();
-		AdminInterface adminPanel = new AdminInterface();
 		while (scanner.hasNextLine()) {
 			String[] commandParts = (scanner.nextLine()).split("\t");
 

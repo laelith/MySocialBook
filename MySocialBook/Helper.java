@@ -12,7 +12,7 @@ public class Helper {
 
 	private static ArrayList<User> userList = new ArrayList<User>();
 
-		public final static String pathToCsv = "C:\\Users\\merve\\users.txt";
+		public final static String pathToCsv = "users.txt";
 		// ADDUSER<TAB>name<TAB>userName<TAB>password<TAB>dateofBirth<TAB>schoolGraduate
 		public static void populateUsers() throws IOException, ParseException {
 			BufferedReader csvReader = new BufferedReader(new FileReader(pathToCsv));
