@@ -49,9 +49,12 @@ public class UserInterface {
 	public void changePassword(String password) {
 		//CHPASS<TAB>oldPassword<TAB>newPassword
 		if (LoggedIn()) {
-			if (this.currentUser.getPassword().equals(password)){
+			if (this.currentUser.getPassword().equals(password))
+			{
 				this.currentUser.setPassword(password);
-			}else {
+			}
+			else
+			{
 				System.out.println("Password mismatch!");
 			}
 		}
@@ -60,20 +63,35 @@ public class UserInterface {
 	// Adds friend to current user
 	// ADDFRIEND<TAB>userName
 	public void addFriend(String userName){
-		if (LoggedIn()) {
-			for (User user : Helper.getUserList()){
-				if (user.getUserName().equals(userName) && !this.currentUser.getFriendList().contains(user)){
-					this.currentUser.getFriendList().add(user);
-					System.out.println(userName + " has been successfully added to your friend list.");
-					return;
-				}else if (user.getUserName().equals(userName) && this.currentUser.getFriendList().contains(user)){
-					System.out.println("This user is already in your friend list!");
-					return;
-				}else{
-					System.out.println("No such user!");
-					return;
-				}
+		if (!LoggedIn())
+		{
+			return;
+		}	
+		// if there is such user
+		User friendUser = null;
+		for (User user : Helper.getUserList())
+		{
+			if (user.getUserName().equals(userName))
+			{
+				friendUser = user;
+				break;
 			}
+		}
+		if (friendUser == null)
+		{
+			System.out.println("No such user!");
+			return;
+		}
+		else if (this.currentUser.getFriendList().contains(friendUser)) 
+		{
+			System.out.println("This user is already in your friend list!");
+			return;
+		}
+		else
+		{
+			this.currentUser.getFriendList().add(friendUser);
+			System.out.println(friendUser.getUserName() + " has been successfully added to your friend list.");
+			return;
 		}
 	}
 	
