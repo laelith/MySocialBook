@@ -5,9 +5,7 @@ import java.io.*;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Objects;
 
-import Post.TextPost;
 
 public class UserInterface {
 	private User currentUser = null;
@@ -48,7 +46,6 @@ public class UserInterface {
 	// Updates current user profile information
 	public void updateProfile(String name, Date dateOfBirth,String graduatedSchool) throws IOException, ParseException {
 		//User must be logged in before updating the profile.
-		Objects.requireNonNull(this.currentUser);
 		if (LoggedIn()){
 			//UPDATEPROFILE<TAB>name<TAB>dateofBirth<TAB>schoolGraduated
 			this.currentUser.setName(name);
@@ -60,9 +57,12 @@ public class UserInterface {
 	// Changes password upon current user request
 	public void changePassword(String password) {
 		//CHPASS<TAB>oldPassword<TAB>newPassword
-		Objects.requireNonNull(this.currentUser);
 		if (LoggedIn()) {
-			this.currentUser.setPassword(password);
+			if (this.currentUser.getPassword().equals(password)){
+				this.currentUser.setPassword(password);
+			}else {
+				System.out.println("Password mismatch!");
+			}
 		}
 	}
 	
