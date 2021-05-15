@@ -69,7 +69,7 @@ class TextPost extends Post{
 
 class ImagePost extends Post{
     private String imagineFileName;
-    private Integer imageResolution;
+    private String imageResolution;
 
     public  String display(){
         return textContent
@@ -80,18 +80,18 @@ class ImagePost extends Post{
                 + "Image Resolution: " + imageResolution;
     }
 
-    public ImagePost(String textContent, Location location, ArrayList<User> taggedFriends, Date date, String imagineFileName, Integer imageResolution) {
+    public ImagePost(String textContent, Location location, ArrayList<User> taggedFriends, Date date, String imagineFileName, String imageResolution) {
         super(textContent, location, taggedFriends, date);
         this.imagineFileName = imagineFileName;
         this.imageResolution = imageResolution;
     }
 
     //Public
-    public Integer getImageResolution() {
+    public String getImageResolution() {
         return imageResolution;
     }
 
-    public void setImageResolution(Integer imageResolution) {
+    public void setImageResolution(String imageResolution) {
         this.imageResolution = imageResolution;
     }
 
