@@ -6,9 +6,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 
 
 public class UserInterface {
@@ -293,7 +291,6 @@ public class UserInterface {
 	// Unblocks user from current user
 	// UNBLOCK<TAB>userName
 	public void unblockUser(String userName) {
-		boolean userExist = false;
 		if (LoggedIn()) {
 			//For friends
 
@@ -302,7 +299,6 @@ public class UserInterface {
 					//Unblocks user
 					this.currentUser.getBlockedFriendList().remove(singleUser);
 					System.out.println(singleUser.getUserName() + " has been successfully unblocked.");
-					userExist = true;
 					return;
 				}
 			}
@@ -313,7 +309,6 @@ public class UserInterface {
 					//Unblocks user
 					this.currentUser.getBlockedList().remove(singleUser);
 					System.out.println(singleUser.getUserName() + " has been successfully unblocked.");
-					userExist = true;
 					return;
 				}
 			}
