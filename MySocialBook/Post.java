@@ -1,3 +1,5 @@
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -54,11 +56,19 @@ abstract class Post {
 }
 
 class TextPost extends Post{
-    public  String display(){
-        return textContent
-                + "Date : " + date
-                + "Location : " + location.getLatitude() + location.getLongitude()
-                + "Friends tagged in this post :" + taggedFriends;
+    public String display(){
+        System.out.println(textContent);
+        String pattern = "MM/dd/yyyy";
+        DateFormat dateFormat = new SimpleDateFormat(pattern);
+        String postBirthDayAsString = dateFormat.format(date);
+        System.out.println("Date : " + postBirthDayAsString);
+        System.out.println("Location : " + location.getLatitude() +", " + location.getLongitude());
+        if (!taggedFriends.isEmpty()){
+            //Check whether there are taggedFriends or not
+            System.out.println("Friends tagged in this post :" + taggedFriends);
+        }
+        System.out.println("----------------");
+        return " ";
     }
 
     //Public
@@ -72,12 +82,24 @@ class ImagePost extends Post{
     private String imageResolution;
 
     public  String display(){
-        return textContent
-                + "Date : " + date
-                + "Location : " + location.getLatitude() + location.getLongitude()
-                + "Friends tagged in this post :" + taggedFriends
-                + "Image: " + imagineFileName
-                + "Image Resolution: " + imageResolution;
+        System.out.println(textContent);
+        String pattern = "MM/dd/yyyy";
+        DateFormat dateFormat = new SimpleDateFormat(pattern);
+        String postBirthDayAsString = dateFormat.format(date);
+        System.out.println("Date : " + postBirthDayAsString);
+        System.out.println("Location : " + location.getLatitude() +", " + location.getLongitude());
+        if (!taggedFriends.isEmpty()){
+            //Check whether there are taggedFriends or not
+            System.out.print("Friends tagged in this post: " );
+            for (User friend: taggedFriends){
+                System.out.print(friend.getName()+ ",");
+            }
+            System.out.println();
+        }
+        System.out.println("Image: " + imagineFileName);
+        System.out.println("Image resolution: " + imageResolution);
+        System.out.println("----------------");
+        return " ";
     }
 
     public ImagePost(String textContent, Location location, ArrayList<User> taggedFriends, Date date, String imagineFileName, String imageResolution) {
@@ -104,17 +126,28 @@ class ImagePost extends Post{
     }
 }
 
-class VideoPost extends Post{
+class VideoPost extends Post {
     private String videoFilename;
     private Double videoDuration;
 
     public  String display(){
-        return textContent
-                + "Date : " + date
-                + "Location : " + location.getLatitude() + location.getLongitude()
-                + "Friends tagged in this post :" + taggedFriends
-                + "Video: " + videoFilename
-                + "Video Duration: " + videoDuration + " minutes";
+        System.out.println(textContent);
+        String pattern = "MM/dd/yyyy";
+        DateFormat dateFormat = new SimpleDateFormat(pattern);
+        String postBirthDayAsString = dateFormat.format(date);
+        System.out.println("Date : " + postBirthDayAsString);
+        System.out.println("Location : " + location.getLatitude() + ", " + location.getLongitude());
+        if (!taggedFriends.isEmpty()) {
+            //Check whether there are taggedFriends or not
+            System.out.print("Friends tagged in this post: ");
+            for (User friend : taggedFriends) {
+                System.out.print(friend.getName() + ",");
+            }
+            System.out.println();
+        }
+        System.out.println("Video: " + videoFilename);
+        System.out.println("Video Duration: " + videoDuration + " minutes");
+        return " ";
     }
 
     public VideoPost(String textContent, Location location, ArrayList<User> taggedFriends, Date date, String videoFilename, Double videoDuration) {

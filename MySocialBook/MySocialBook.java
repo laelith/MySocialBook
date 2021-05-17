@@ -7,6 +7,9 @@ import java.text.SimpleDateFormat;
 
 public class MySocialBook {
 	public static void main(String[] args) throws IOException, ParseException {
+
+		//String userFile = args[0];
+		//String commandsFile = args[1];
 		//Creates users
 		Helper.populateUsers();
 
@@ -62,16 +65,29 @@ public class MySocialBook {
 					Double longitudeText = Double.parseDouble(commandParts[2]);
 					Double latitudeText = Double.parseDouble(commandParts[3]);
 					userPanel.addTextPost(commandParts[1], longitudeText, latitudeText, commandParts[4]);
+					System.out.println("----------------");
 					break;
 				case "ADDPOST-IMAGE":
 					Double longitudeImage = Double.parseDouble(commandParts[2]);
 					Double latitudeImage = Double.parseDouble(commandParts[3]);
 					userPanel.addImagePost(commandParts[1], longitudeImage, latitudeImage, commandParts[4], commandParts[5], commandParts[6]);
+					System.out.println("----------------");
 					break;
 				case "ADDPOST-VIDEO":
+					Double longitudeVideo = Double.parseDouble(commandParts[2]);
+					Double latitudeVideo = Double.parseDouble(commandParts[3]);
+					Double videoDuration = Double.parseDouble(commandParts[6]);
+					userPanel.addVideoPost(commandParts[1], longitudeVideo, latitudeVideo, commandParts[4], commandParts[5], videoDuration);
+					System.out.println("----------------");
+					break;
 				case "REMOVELASTPOST":
+					userPanel.removeLastPost();
+					System.out.println("----------------");
+					break;
 				case "SHOWPOSTS":
-
+					userPanel.showPosts(commandParts[1]);
+					System.out.println("----------------");
+					break;
 				case "BLOCK":
 					userPanel.blockUser(commandParts[1]);
 					System.out.println("----------------");
@@ -89,7 +105,6 @@ public class MySocialBook {
 				case "SIGNOUT":
 					userPanel.signOut();
 					break;
-
 			}
 		}
 		scanner.close();

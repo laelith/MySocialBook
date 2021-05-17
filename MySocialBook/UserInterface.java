@@ -139,14 +139,24 @@ public class UserInterface {
 			Date date = new Date(System.currentTimeMillis());
 			//formatter.format(date); (To make a human-readable date)
 			ArrayList<User> taggedFriends = new ArrayList<User>();
+			ArrayList<String> taggedFriendsNameList = new ArrayList<String>();
 			String[] taggedPeople = tagged.split(":");
-			List<String> nameList = new ArrayList<>(Arrays.asList(taggedPeople));
-				for (User friend: this.currentUser.getFriendList()){
-					if (nameList.contains(friend.getUserName())){
-						System.out.println(friend.getUserName());
+			for (User friend: this.currentUser.getFriendList()){
+				for (int i=0;i<taggedPeople.length; i++){
+					if (friend.getUserName().equals(taggedPeople[i])){
+						taggedFriends.add(friend);
+						taggedFriendsNameList.add(friend.getUserName());
+						break;
 					}
-					System.out.println( "girmedi" + friend.getUserName());
 				}
+			}
+			for (String singleTagged: taggedPeople){
+				if (taggedFriendsNameList.contains(singleTagged)){
+					continue;
+				}else{
+					System.out.println(singleTagged + " is not your friend, and will not be tagged!");
+				}
+			}
 			TextPost userPost = new TextPost(textContent, location, taggedFriends, date);
 			System.out.println("The post has been successfully added.");
 			this.currentUser.getPostCollection().add(userPost);
@@ -160,20 +170,28 @@ public class UserInterface {
 			Location location = new Location(latitude,longitude);
 			Date date = new Date(System.currentTimeMillis());
 			//formatter.format(date); (To make a human-readable date)
-			ArrayList<User> availableTaggedFriends = new ArrayList<User>();
-			for (User allFriend: this.currentUser.getFriendList()) {
-				for (User taggedFriend : taggedFriends) {
-					//Checks whether this current user have a friend or not
-					if (allFriend.getUserName().contains(taggedFriend.getUserName())) {
-						availableTaggedFriends.add(taggedFriend);
-					}else{
-						System.out.println(taggedFriend.getUserName() + " is not your friend, and will not be tagged!");
+			ArrayList<User> taggedFriends = new ArrayList<User>();
+			ArrayList<String> taggedFriendsNameList = new ArrayList<String>();
+			String[] taggedPeople = tagged.split(":");
+			for (User friend: this.currentUser.getFriendList()){
+				for (int i=0;i<taggedPeople.length; i++){
+					if (friend.getUserName().equals(taggedPeople[i])){
+						taggedFriends.add(friend);
+						taggedFriendsNameList.add(friend.getUserName());
+						break;
 					}
 				}
-				ImagePost userPost = new ImagePost(textContent, location, availableTaggedFriends, date, imagineFileName, imageResolution);
-				System.out.println("The post has been successfully added.");
-				this.currentUser.getPostCollection().add(userPost);
 			}
+			for (String singleTagged: taggedPeople){
+				if (taggedFriendsNameList.contains(singleTagged)){
+					continue;
+				}else{
+					System.out.println(singleTagged + " is not your friend, and will not be tagged!");
+				}
+			}
+			ImagePost userPost = new ImagePost(textContent, location, taggedFriends, date, imagineFileName, imageResolution);
+			System.out.println("The post has been successfully added.");
+			this.currentUser.getPostCollection().add(userPost);
 		}
 	}
 
@@ -181,27 +199,34 @@ public class UserInterface {
 	//ADDPOST-VIDEO<TAB>textContent<TAB>longitude<TAB>latitude<TAB> userName1<:>userName2<:>..<:>userNameN<TAB>filePath<TAB>videoDuration
 	public void addVideoPost(String textContent, Double longitude, Double latitude, String tagged, String videoFilename, Double videoDuration) {
 		if (LoggedIn()) {
-			if (LoggedIn()) {
-				Location location = new Location(latitude,longitude);
-				Date date = new Date(System.currentTimeMillis());
-				//formatter.format(date); (To make a human-readable date)
-				ArrayList<User> availableTaggedFriends = new ArrayList<User>();
-				for (User allFriend: this.currentUser.getFriendList()) {
-					for (User taggedFriend : taggedFriends) {
-						//Checks whether this current user have a friend or not
-						if (allFriend.getUserName().contains(taggedFriend.getUserName())) {
-							availableTaggedFriends.add(taggedFriend);
-						}else{
-							System.out.println(taggedFriend.getUserName() + " is not your friend, and will not be tagged!");
-						}
+			Location location = new Location(latitude,longitude);
+			Date date = new Date(System.currentTimeMillis());
+			//formatter.format(date); (To make a human-readable date)
+			ArrayList<User> taggedFriends = new ArrayList<User>();
+			ArrayList<String> taggedFriendsNameList = new ArrayList<String>();
+			String[] taggedPeople = tagged.split(":");
+			for (User friend: this.currentUser.getFriendList()){
+				for (int i=0;i<taggedPeople.length; i++){
+					if (friend.getUserName().equals(taggedPeople[i])){
+						taggedFriends.add(friend);
+						taggedFriendsNameList.add(friend.getUserName());
+						break;
 					}
-					VideoPost userPost = new VideoPost(textContent, location, availableTaggedFriends, date, videoFilename, videoDuration);
-					System.out.println("The post has been successfully added.");
-					this.currentUser.getPostCollection().add(userPost);
 				}
 			}
+			for (String singleTagged: taggedPeople){
+				if (taggedFriendsNameList.contains(singleTagged)){
+					continue;
+				}else{
+					System.out.println(singleTagged + " is not your friend, and will not be tagged!");
+				}
+			}
+			VideoPost userPost = new VideoPost(textContent, location, taggedFriends, date, videoFilename, videoDuration);
+			System.out.println("The post has been successfully added.");
+			this.currentUser.getPostCollection().add(userPost);
 		}
 	}
+
 
 	// Removing the last post of current user
 	// REMOVELASTPOST
@@ -225,12 +250,13 @@ public class UserInterface {
 			for (User user: Helper.getUserList()){
 				if (user.getUserName().equals(userName)){
 					if (user.getPostCollection()==null){
-						System.out.println(user.getUserName() + " does not have any posts yet.");
+						System.out.println(user.getName() + " does not have any posts yet.");
 					}else{
-						System.out.println(user.getUserName() + "'s Posts");
+						System.out.println("**************");
+						System.out.println(user.getName() + "'s Posts");
 						System.out.println("**************");
 						for (Post post : user.getPostCollection()){
-							System.out.println(post.display());
+							post.display();
 						}
 					}
 				}
